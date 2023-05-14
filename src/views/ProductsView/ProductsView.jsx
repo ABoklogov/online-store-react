@@ -1,5 +1,7 @@
+import ProductsList from 'components/ProductsList'
+
 function ProductsView() {
-  return ( <div>ProductsView</div> );
+  return ( <ProductsList/> );
 }
 
 export default ProductsView;
