@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import ProductsView from 'views/ProductsView';
 import CardProductView from 'views/CardProductView';
@@ -12,13 +13,13 @@ import AppBar from 'components/AppBar';
 function App() {
   return (
     <Provider store={store}>
-      <AppBar/>
+      <AppBar />
       <Container>
         <Routes>
-          <Route path='/' element={ <ProductsView/>} />
-          <Route path='/card' element={ <CardProductView/>} />
-          <Route path='/basket' element={ <BasketView/>} />
-          <Route path='*' element={ <NotFoundView/>} />
+          <Route path='/' element={<ProductsView />} />
+          <Route path='/card' element={<CardProductView />} />
+          <Route path='/basket' element={<BasketView />} />
+          <Route path='*' element={<NotFoundView />} />
         </Routes>
       </Container>
     </Provider>

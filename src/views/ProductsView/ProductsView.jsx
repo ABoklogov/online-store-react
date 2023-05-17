@@ -7,12 +7,13 @@ function ProductsView() {
   const dispatch = useDispatch();
   const { catalog } = useSelector(state => state);
 
+  // получаем товары
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
 
-  return (<ProductsList />);
+  return (<ProductsList products={catalog.products.items} />);
 }
 
 export default ProductsView;

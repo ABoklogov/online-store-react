@@ -7,10 +7,7 @@ const initialState = {
     error: '',
   },
   cardProduct: {
-    id: '',
-    name: '',
-    price: '',
-    image: '',
+    product: null,
     isLoading: false,
     error: '',
   },
@@ -46,6 +43,14 @@ export const catalogSlice = createSlice({
     }),
 
     // -------- карточка товара --------
+    // карточка товара
+    setCardProduct: (state, { payload }) => ({
+      ...state,
+      cardProduct: {
+        ...state.cardProduct,
+        product: payload,
+      }
+    }),
     // загрузка
     loadingSetProduct: (state, { payload }) => ({
       ...state,
@@ -69,6 +74,7 @@ export const {
   setCatalog,
   loadingSetCatalog,
   errorSetCatalog,
+  setCardProduct,
   loadingSetProduct,
   errorSetProduct,
 } = catalogSlice.actions;
