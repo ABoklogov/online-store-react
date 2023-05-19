@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+}
+
+.currentImage {
+  width: 400px;
+}
+
+.imgScroll {
+  width: 100px;
+}

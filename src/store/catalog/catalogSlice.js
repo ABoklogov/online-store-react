@@ -6,11 +6,11 @@ const initialState = {
     isLoading: false,
     error: '',
   },
-  cardProduct: {
-    product: null,
-    isLoading: false,
-    error: '',
-  },
+  // cardProduct: {
+  //   product: null,
+  //   isLoading: false,
+  //   error: '',
+  // },
 };
 
 export const catalogSlice = createSlice({
@@ -44,29 +44,29 @@ export const catalogSlice = createSlice({
 
     // -------- карточка товара --------
     // карточка товара
-    setCardProduct: (state, { payload }) => ({
-      ...state,
-      cardProduct: {
-        ...state.cardProduct,
-        product: payload,
-      }
-    }),
+    // setCardProduct: (state, { payload }) => ({
+    //   ...state,
+    //   cardProduct: {
+    //     ...state.cardProduct,
+    //     product: payload,
+    //   }
+    // }),
     // загрузка
-    loadingSetProduct: (state, { payload }) => ({
-      ...state,
-      cardProduct: {
-        ...state.cardProduct,
-        isLoading: payload,
-      }
-    }),
+    // loadingSetProduct: (state, { payload }) => ({
+    //   ...state,
+    //   cardProduct: {
+    //     ...state.cardProduct,
+    //     isLoading: payload,
+    //   }
+    // }),
     // ошибка
-    errorSetProduct: (state, { payload }) => ({
-      ...state,
-      cardProduct: {
-        ...state.cardProduct,
-        error: payload,
-      }
-    }),
+    // errorSetProduct: (state, { payload }) => ({
+    //   ...state,
+    //   cardProduct: {
+    //     ...state.cardProduct,
+    //     error: payload,
+    //   }
+    // }),
   },
 });
 
@@ -74,7 +74,7 @@ export const {
   setCatalog,
   loadingSetCatalog,
   errorSetCatalog,
-  setCardProduct,
-  loadingSetProduct,
-  errorSetProduct,
+  // setCardProduct,
+  // loadingSetProduct,
+  // errorSetProduct,
 } = catalogSlice.actions;

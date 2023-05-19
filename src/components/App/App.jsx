@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import ProductsView from 'views/ProductsView';
 import CardProductView from 'views/CardProductView';
@@ -17,7 +17,7 @@ function App() {
       <Container>
         <Routes>
           <Route path='/' element={<ProductsView />} />
-          <Route path='/card' element={<CardProductView />} />
+          <Route path='/product/:productId' element={<CardProductView />} />
           <Route path='/basket' element={<BasketView />} />
           <Route path='*' element={<NotFoundView />} />
         </Routes>

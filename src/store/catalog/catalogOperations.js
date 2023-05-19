@@ -3,9 +3,9 @@ import {
   setCatalog,
   loadingSetCatalog,
   errorSetCatalog,
-  setCardProduct,
-  loadingSetProduct,
-  errorSetProduct,
+  // setCardProduct,
+  // loadingSetProduct,
+  // errorSetProduct,
 } from './catalogSlice';
 
 // список продуктов
@@ -42,21 +42,21 @@ export const fetchProducts = () => async (dispatch, getState) => {
 };
 
 // карточка товара
-export const fetchCardProduct = (id) => async (dispatch, getState) => {
-  const { catalog } = getState();
+// export const fetchCardProduct = (id) => async (dispatch, getState) => {
+//   const { catalog } = getState();
 
-  try {
-    dispatch(loadingSetProduct(true));
-    const findProduct = catalog.products.items.find(product => product.id === id);
+//   try {
+//     dispatch(loadingSetProduct(true));
+//     const findProduct = catalog.products.items.find(product => product.id === id);
 
-    if (findProduct) {
-      dispatch(errorSetProduct(''));
-      dispatch(loadingSetProduct(false));
-      dispatch(setCardProduct(findProduct));
-    };
-  } catch (error) {
-    dispatch(loadingSetProduct(false));
-    dispatch(errorSetProduct(error.message));
-    console.log(error.message);
-  };
-};
+//     if (findProduct) {
+//       dispatch(errorSetProduct(''));
+//       dispatch(loadingSetProduct(false));
+//       dispatch(setCardProduct(findProduct));
+//     };
+//   } catch (error) {
+//     dispatch(loadingSetProduct(false));
+//     dispatch(errorSetProduct(error.message));
+//     console.log(error.message);
+//   };
+// };
