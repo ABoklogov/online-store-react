@@ -1,11 +1,14 @@
-import { getProducts } from "services/api";
+import { getProducts, getProduct, getSizes } from "services/api";
 import {
   setCatalog,
   loadingSetCatalog,
   errorSetCatalog,
   // setCardProduct,
-  // loadingSetProduct,
-  // errorSetProduct,
+  loadingSetProduct,
+  errorSetProduct,
+  setSizes,
+  loadingSetSizes,
+  errorSetSizes,
 } from './catalogSlice';
 
 // список продуктов
@@ -42,21 +45,41 @@ export const fetchProducts = () => async (dispatch, getState) => {
 };
 
 // карточка товара
-// export const fetchCardProduct = (id) => async (dispatch, getState) => {
-//   const { catalog } = getState();
+export const fetchCardProduct = (id) => async (dispatch) => {
+  try {
+    dispatch(loadingSetProduct(true));
+    const data = await getProduct(id);
 
-//   try {
-//     dispatch(loadingSetProduct(true));
-//     const findProduct = catalog.products.items.find(product => product.id === id);
+    if (data === undefined) {
+      throw new Error('Server Error!');
+    } else {
+      dispatch(loadingSetProduct(false));
+      dispatch(errorSetProduct(''));
+      return data;
+    };
+  } catch (error) {
+    dispatch(loadingSetProduct(false));
+    dispatch(errorSetProduct(error.message));
+    console.log(error.message);
+  };
+};
 
-//     if (findProduct) {
-//       dispatch(errorSetProduct(''));
-//       dispatch(loadingSetProduct(false));
-//       dispatch(setCardProduct(findProduct));
-//     };
-//   } catch (error) {
-//     dispatch(loadingSetProduct(false));
-//     dispatch(errorSetProduct(error.message));
-//     console.log(error.message);
-//   };
-// };
+// размеры
+export const fetchSizes = () => async (dispatch) => {
+  try {
+    dispatch(loadingSetSizes(true));
+    const data = await getSizes();
+
+    if (data === undefined) {
+      throw new Error('Server Error!');
+    } else {
+      dispatch(loadingSetSizes(false));
+      dispatch(errorSetSizes(''));
+      dispatch(setSizes(data));
+    };
+  } catch (error) {
+    dispatch(loadingSetSizes(false));
+    dispatch(errorSetSizes(error.message));
+    console.log(error.message);
+  };
+};

@@ -1,10 +1,18 @@
 :root {
+  /* text */
+  --title: 17px;
+  --text: 15px;
+  --subText: 11px;
   /* colors: */
   --black: #000c0c;
   --white: #ffffff;
   --grey: #a8a8a8;
+  --greyLight: #e3e3e3;
   --darkGray: #5c5c5c;
   --blue: #0f7fcc;
   --blueHover: #084f80;
+  --blueLight: #b5d3e7;
   --green: #9cc330;
+  /* radius */
+  --radiusItem: 8px;
 }

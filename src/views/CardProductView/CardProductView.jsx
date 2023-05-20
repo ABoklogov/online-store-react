@@ -1,38 +1,30 @@
 import {
   useParams,
-  // useRouteMatch,
-  // Routes,
-  // Route,
   useLocation,
   useNavigate,
 } from 'react-router-dom';
 import s from 'views/CardProductView/CardProductView.module.css';
 import { useState, useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-import * as API from 'services/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCardProduct } from 'store/catalog/catalogOperations';
 import ProductDetails from 'components/ProductDetails';
 import ErrorMessage from 'components/ErrorMessage';
 import Button from 'components/Button';
 
 function CardProductView() {
   const { productId } = useParams();
-  // const { url, path } = useRouteMatch();
   const location = useLocation();
-  // console.log("🚀 ~ CardProductView ~ location:", location)
   const navigate = useNavigate()
-  // const dispatch = useDispatch();
-  // const { catalog } = useSelector(state => state);
+  const dispatch = useDispatch();
+  const { catalog } = useSelector(state => state);
   const [product, setProduct] = useState(null);
-  const [error, setError] = useState('');
 
   useEffect(() => {
-    API
-      .getProduct(productId)
-      .then(data => {
-        setProduct(data);
-      })
-      .catch(error => setError(error));
-  }, [productId])
+    (async () => {
+      const product = await dispatch(fetchCardProduct(productId));
+      setProduct(product);
+    })();
+  }, [dispatch, productId])
 
   const onGoBack = () => {
     const backLocation = location?.state?.from;
@@ -51,7 +43,7 @@ function CardProductView() {
 
       {
         (product && <ProductDetails product={product} />) || (
-          <ErrorMessage error={error} />
+          <ErrorMessage error={catalog.cardProduct.error} />
         )
       }
     </>

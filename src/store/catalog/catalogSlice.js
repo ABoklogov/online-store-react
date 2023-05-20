@@ -6,11 +6,16 @@ const initialState = {
     isLoading: false,
     error: '',
   },
-  // cardProduct: {
-  //   product: null,
-  //   isLoading: false,
-  //   error: '',
-  // },
+  cardProduct: {
+    // product: null,
+    isLoading: false,
+    error: '',
+  },
+  sizes: {
+    items: [],
+    isLoading: false,
+    error: '',
+  }
 };
 
 export const catalogSlice = createSlice({
@@ -52,21 +57,46 @@ export const catalogSlice = createSlice({
     //   }
     // }),
     // загрузка
-    // loadingSetProduct: (state, { payload }) => ({
-    //   ...state,
-    //   cardProduct: {
-    //     ...state.cardProduct,
-    //     isLoading: payload,
-    //   }
-    // }),
+    loadingSetProduct: (state, { payload }) => ({
+      ...state,
+      cardProduct: {
+        ...state.cardProduct,
+        isLoading: payload,
+      }
+    }),
     // ошибка
-    // errorSetProduct: (state, { payload }) => ({
-    //   ...state,
-    //   cardProduct: {
-    //     ...state.cardProduct,
-    //     error: payload,
-    //   }
-    // }),
+    errorSetProduct: (state, { payload }) => ({
+      ...state,
+      cardProduct: {
+        ...state.cardProduct,
+        error: payload,
+      }
+    }),
+
+    // ---------- размеры ----------
+    setSizes: (state, { payload }) => ({
+      ...state,
+      sizes: {
+        ...state.sizes,
+        items: [...payload],
+      }
+    }),
+    // загрузка
+    loadingSetSizes: (state, { payload }) => ({
+      ...state,
+      sizes: {
+        ...state.sizes,
+        isLoading: payload,
+      }
+    }),
+    // ошибка
+    errorSetSizes: (state, { payload }) => ({
+      ...state,
+      sizes: {
+        ...state.sizes,
+        error: payload,
+      }
+    }),
   },
 });
 
@@ -75,6 +105,9 @@ export const {
   loadingSetCatalog,
   errorSetCatalog,
   // setCardProduct,
-  // loadingSetProduct,
-  // errorSetProduct,
+  loadingSetProduct,
+  errorSetProduct,
+  setSizes,
+  loadingSetSizes,
+  errorSetSizes,
 } = catalogSlice.actions;
