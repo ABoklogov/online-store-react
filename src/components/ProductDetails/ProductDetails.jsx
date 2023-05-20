@@ -16,7 +16,7 @@ const ProductDetails = ({ product }) => {
   const [currentImage, setCurrentImage] = useState(null);
   const [size, setSize] = useState(null);
   
-  console.log("🚀 ~ ProductDetails ~ color:", color)
+  // console.log("🚀 ~ ProductDetails ~ color:", color)
 
   // обновляем текущий цвет
   useEffect(() => {

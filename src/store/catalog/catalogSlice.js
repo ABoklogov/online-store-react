@@ -13,6 +13,7 @@ const initialState = {
   },
   sizes: {
     items: [],
+    selecteSize: null,
     isLoading: false,
     error: '',
   }
@@ -81,6 +82,14 @@ export const catalogSlice = createSlice({
         items: [...payload],
       }
     }),
+    // выбранный размер
+    setSelectedSize: (state, { payload }) => ({
+      ...state,
+      sizes: {
+        ...state.sizes,
+        selecteSize: payload,
+      }
+    }),
     // загрузка
     loadingSetSizes: (state, { payload }) => ({
       ...state,
@@ -108,6 +117,7 @@ export const {
   loadingSetProduct,
   errorSetProduct,
   setSizes,
+  setSelectedSize,
   loadingSetSizes,
   errorSetSizes,
 } = catalogSlice.actions;

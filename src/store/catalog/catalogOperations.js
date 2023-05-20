@@ -1,4 +1,9 @@
-import { getProducts, getProduct, getSizes } from "services/api";
+import {
+  getProducts,
+  getProduct,
+  getSizes,
+  getSize,
+} from "services/api";
 import {
   setCatalog,
   loadingSetCatalog,
@@ -7,6 +12,7 @@ import {
   loadingSetProduct,
   errorSetProduct,
   setSizes,
+  setSelectedSize,
   loadingSetSizes,
   errorSetSizes,
 } from './catalogSlice';
@@ -76,6 +82,26 @@ export const fetchSizes = () => async (dispatch) => {
       dispatch(loadingSetSizes(false));
       dispatch(errorSetSizes(''));
       dispatch(setSizes(data));
+    };
+  } catch (error) {
+    dispatch(loadingSetSizes(false));
+    dispatch(errorSetSizes(error.message));
+    console.log(error.message);
+  };
+};
+
+export const chooseSize = (id) => async (dispatch) => {
+  try {
+    dispatch(loadingSetSizes(true));
+    const data = await getSize(id);
+    // console.log("🚀 ~ chooseSize ~ data:", data)
+
+    if (data === undefined) {
+      throw new Error('Server Error!');
+    } else {
+      dispatch(loadingSetSizes(false));
+      dispatch(errorSetSizes(''));
+      dispatch(setSelectedSize(data));
     };
   } catch (error) {
     dispatch(loadingSetSizes(false));
