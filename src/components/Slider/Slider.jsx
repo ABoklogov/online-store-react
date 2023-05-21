@@ -12,12 +12,12 @@ function Slider({ images, currentImage, setCurrentImage }) {
         className={s.currentImage}
       />
 
-      <ul>
+      <ul className={s.listImages}>
         {
           images?.map(image => (
             <li
               key={image}
-              className={s.Image}
+              className={s.image}
               onClick={() => setCurrentImage(image)}
             >
               <img src={image} alt="images-scroll" className={s.imgScroll} />

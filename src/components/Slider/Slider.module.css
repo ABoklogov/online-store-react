@@ -9,3 +9,24 @@
 .imgScroll {
   width: 100px;
 }
+
+.listImages {
+  list-style: none;
+  padding-inline-start: 10px;
+  margin: 0px;
+}
+
+.image {
+  cursor: pointer;
+  padding: 3px;
+  overflow: hidden;
+}
+
+.image:hover {
+  outline: 2px solid var(--blueLight);
+  border-radius: var(--radiusItem);
+}
+
+.image:not(:last-child) {
+  margin-bottom: 10px;
+}

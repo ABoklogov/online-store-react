@@ -1,0 +1,21 @@
+.colorsList {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+.color {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: var(--text);
+  color: var(--black);
+  cursor: pointer;
+}
+
+.color:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.color:hover {
+  text-decoration: underline;
+  color: var(--blue);
+}

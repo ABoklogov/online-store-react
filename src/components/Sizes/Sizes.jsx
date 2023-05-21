@@ -1,18 +1,31 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import s from 'components/Sizes/Sizes.module.css';
 import PropTypes from 'prop-types';
 import {fetchSizes, chooseSize} from 'store/catalog/catalogOperations';
 import { setSelectedSize } from 'store/catalog/catalogSlice';
 
-function Sizes({ productSize, setSize }) {
+function Sizes({ productSize, removeSearchParam, addSearchParam }) {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
   const { catalog } = useSelector(state => state);
   const [activeSizeId, setActiveSizeId] = useState(null);
-  
+
   useEffect(() => {
     dispatch(fetchSizes());
+    return () => removeSize();
   }, [dispatch]);
+  
+  // проверяем url строку
+  useEffect(() => {
+    const sizeQuery = searchParams.get('size') || '';
+
+    if (sizeQuery) {
+      const findSize = productSize.find(el => el === +sizeQuery);
+      findSize ? addSize(findSize) : removeSize();
+    };
+  }, [productSize, searchParams]);
   
   const sizeAvailability = (id) => {
     let style = null;
@@ -26,6 +39,7 @@ function Sizes({ productSize, setSize }) {
         };
       };
     });
+
     if (id === activeSizeId) {
       style = {...style, borderColor: "#084f80", backgroundColor: "#084f80"}
     };
@@ -33,7 +47,7 @@ function Sizes({ productSize, setSize }) {
     return style;
   };
 
-  const clickSize = (e, id) => {
+  const changeSize = (e, id) => {
     const findSize = productSize?.find(el => el === id);
     if (!findSize) {
       return 
@@ -45,21 +59,31 @@ function Sizes({ productSize, setSize }) {
         event.style.borderColor = '#084f80';
  
         if (activeSizeId === id) {
-          setActiveSizeId(null);
-          dispatch(setSelectedSize(null));
+          removeSize();
+          removeSearchParam('size');
         } else {
-          dispatch(chooseSize(id));
-          setActiveSizeId(id);
+          addSize(id);
+          addSearchParam('size', id)
         };
       } else {
         event.style.backgroundColor = '#b5d3e7';
         event.style.borderColor = '#0f7fcc';
 
         event.data_selected = '';
-        dispatch(setSelectedSize(null));
-        setActiveSizeId(null);
+        removeSize();
+        removeSearchParam('size');
       };
     };
+  };
+
+  const addSize = (id) => {
+    dispatch(chooseSize(id));
+    setActiveSizeId(id);
+  };
+  
+  const removeSize = () => {
+    dispatch(setSelectedSize(null));
+    setActiveSizeId(null);
   };
 
   return (
@@ -68,7 +92,7 @@ function Sizes({ productSize, setSize }) {
           catalog.sizes?.items?.map(({id, label, number}) => (
             <li
               key={id}
-              onClick={(e) => clickSize(e, id)}
+              onClick={(e) => changeSize(e, id)}
               style={sizeAvailability(id)}
               className={s.sizeItem}
               data_selected={activeSizeId === id ? 'active' : ''}
@@ -83,7 +107,8 @@ function Sizes({ productSize, setSize }) {
 
 Sizes.protoType = {
   productSize: PropTypes.arrayOf(PropTypes.number),
-  setSize: PropTypes.func,
+  removeSearchParam: PropTypes.func,
+  addSearchParam: PropTypes.func,
 };
 
 export default Sizes;
