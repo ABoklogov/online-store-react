@@ -1,11 +1,13 @@
-.Button {
-  background-color: rgb(160, 175, 171);
-  border-radius: 5px;
-  border: 1px solid rgb(160, 175, 171);
-  height: 25px;
+.button {
+  background-color: var(--blueLight);
+  border-radius: var(--radiusItem);
+  border: none;
+  height: 30px;
+  padding: 2px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
-.Button:hover {
-  background-color: rgb(65, 127, 194);
-  border-color: rgb(65, 127, 194);
+.button:hover {
+  background-color: var(--blueHover);
 }

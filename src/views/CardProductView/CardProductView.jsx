@@ -38,7 +38,11 @@ function CardProductView() {
   return (
     <>
       <div className={s.buttonBox}>
-        <Button onGoBack={onGoBack} />
+        <Button
+          onClick={onGoBack}
+          text={"Назад"}
+          ariaLabel={"Вернуться назад"}
+        />
       </div>
 
       {

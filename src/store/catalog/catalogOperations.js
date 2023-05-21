@@ -90,11 +90,11 @@ export const fetchSizes = () => async (dispatch) => {
   };
 };
 
+//выбрать размер
 export const chooseSize = (id) => async (dispatch) => {
   try {
     dispatch(loadingSetSizes(true));
     const data = await getSize(id);
-    // console.log("🚀 ~ chooseSize ~ data:", data)
 
     if (data === undefined) {
       throw new Error('Server Error!');

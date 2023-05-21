@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 // import noImage from '../../img/noImage.jpeg';
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './ProductDetails.module.css';
 import PropTypes from 'prop-types';
 import Slider from 'components/Slider';
@@ -9,13 +10,13 @@ import Colors from 'components/Colors';
 import Price from 'components/Price';
 import Name from 'components/Name';
 import Sizes from 'components/Sizes';
+import Button from 'components/Button';
 
 const ProductDetails = ({ product }) => {
+  const { catalog } = useSelector(state => state);
   const [searchParams, setSearchParams] = useSearchParams();
   const [color, setColor] = useState(null);
   const [currentImage, setCurrentImage] = useState(null);
-
-  // console.log("🚀 ~ ProductDetails ~ color:", color)
 
   // обновляем текущий цвет
   useEffect(() => {
@@ -54,6 +55,11 @@ const ProductDetails = ({ product }) => {
     setSearchParams({...search, [key]: value });
   };
 
+  const addToBasket = () => {
+    console.log("🚀 ~ ProductDetails ~ color:", color)
+    console.log('🚀 ~ ProductDetails ~size', catalog.sizes.selecteSize);
+  };
+
   return (
     <div className={s.container}>
       {color &&
@@ -77,7 +83,20 @@ const ProductDetails = ({ product }) => {
             />
           </div>
         )}
-        <Colors colors={product.colors} changeColor={changeColor} />
+        <Colors
+          colors={product.colors}
+          changeColor={changeColor}
+          currentColor={color?.id}
+        />
+
+        <div className={s.basketBtn}>
+          <Button
+            onClick={addToBasket}
+            text={"В корзину"}
+            ariaLabel={"добавить в корзину"}
+            disabled={ (!catalog.sizes.selecteSize || !color) ?? false }
+          />
+        </div>
       </div>
     </div>
   );
