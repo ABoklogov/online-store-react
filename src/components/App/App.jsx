@@ -1,26 +1,37 @@
-// import { useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom'
-import ProductsView from 'views/ProductsView';
-import CardProductView from 'views/CardProductView';
-import BasketView from 'views/BasketView';
 import NotFoundView from 'views/NotFoundView';
 import { Provider } from 'react-redux';
 import { store } from 'store/index';
 // import s from './App.module.css';
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
+import Spinner from 'components/Spinner';
+
+const ProductsView = lazy(() =>
+  import('views/ProductsView'),
+);
+const CardProductView = lazy(() =>
+  import('views/CardProductView'),
+);
+const BasketView = lazy(() =>
+  import('views/BasketView'),
+);
 
 function App() {
   return (
     <Provider store={store}>
       <AppBar />
+      
       <Container>
-        <Routes>
-          <Route path='/' element={<ProductsView />} />
-          <Route path='/product/:productId' element={<CardProductView />} />
-          <Route path='/basket' element={<BasketView />} />
-          <Route path='*' element={<NotFoundView />} />
-        </Routes>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path='/' element={<ProductsView />} />
+            <Route path='/product/:productId' element={<CardProductView />} />
+            <Route path='/basket' element={<BasketView />} />
+            <Route path='*' element={<NotFoundView />} />
+          </Routes>
+        </Suspense>
       </Container>
     </Provider>
   );

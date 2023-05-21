@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-// import noImage from '../../img/noImage.jpeg';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ProductDetails.module.css';
 import PropTypes from 'prop-types';
+import { addProductBasket } from 'store/basket/basketOperations';
 import Slider from 'components/Slider';
 import Description from 'components/Description';
 import Colors from 'components/Colors';
@@ -13,6 +13,7 @@ import Sizes from 'components/Sizes';
 import Button from 'components/Button';
 
 const ProductDetails = ({ product }) => {
+  const dispatch = useDispatch();
   const { catalog } = useSelector(state => state);
   const [searchParams, setSearchParams] = useSearchParams();
   const [color, setColor] = useState(null);
@@ -56,8 +57,16 @@ const ProductDetails = ({ product }) => {
   };
 
   const addToBasket = () => {
-    console.log("🚀 ~ ProductDetails ~ color:", color)
-    console.log('🚀 ~ ProductDetails ~size', catalog.sizes.selecteSize);
+    const productTotal = {
+      id: `${product.id}${color.id}${catalog.sizes.selecteSize.id}`,
+      name: product.name,
+      description: color.description,
+      color: color.name,
+      image: color.images[0],
+      price: color.price,
+      size: catalog.sizes.selecteSize,
+    };
+    dispatch(addProductBasket(productTotal));
   };
 
   return (

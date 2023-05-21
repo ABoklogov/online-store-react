@@ -5,6 +5,7 @@ import s from 'components/Sizes/Sizes.module.css';
 import PropTypes from 'prop-types';
 import {fetchSizes, chooseSize} from 'store/catalog/catalogOperations';
 import { setSelectedSize } from 'store/catalog/catalogSlice';
+import Spinner from 'components/Spinner';
 
 function Sizes({ productSize, removeSearchParam, addSearchParam }) {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
   useEffect(() => {
     dispatch(fetchSizes());
     return () => removeSize();
-  }, [dispatch]);
+  }, []);
   
   // проверяем url строку
   useEffect(() => {
@@ -89,7 +90,7 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
   return (
       <ul className={s.Sizes}>
         {
-          catalog.sizes?.items?.map(({id, label, number}) => (
+        catalog.sizes?.items?.map(({ id, label, number }) => (
             <li
               key={id}
               onClick={(e) => changeSize(e, id)}
@@ -97,7 +98,13 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
               className={s.sizeItem}
               data_selected={activeSizeId === id ? 'active' : ''}
             >
-              <span className={s.sizeText}>{ `${number} (${label})`}</span>
+              {
+                (catalog.sizes.isLoading && activeSizeId === id) ? (
+                  <Spinner margin={0} width={30} />
+                ) : (
+                  <span className={s.sizeText}>{ `${number} (${label})`}</span>
+                )
+              }
             </li>
           ))
         }

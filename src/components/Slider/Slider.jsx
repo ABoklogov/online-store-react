@@ -1,13 +1,12 @@
-// import { useState } from 'react';
+import noImage from 'img/noImage.jpeg';
 import s from 'components/Slider/Slider.module.css';
 import PropTypes from 'prop-types';
 
 function Slider({ images, currentImage, setCurrentImage }) {
-
   return (
     <div className={s.container}>
       <img
-        src={currentImage}
+        src={currentImage ? currentImage : noImage}
         alt="images-product"
         className={s.currentImage}
       />
