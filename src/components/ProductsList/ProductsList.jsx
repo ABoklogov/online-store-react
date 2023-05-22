@@ -1,18 +1,17 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import s from 'components/ProductsList/ProductsList.module.css';
 import Name from 'components/Name';
 
 function ProductsList({ products }) {
-  // const location = useLocation();
   const navigate = useNavigate();
 
   const goToProduct = (id, basket) => {
     const data = basket ? {
-      images: basket?.color?.images,
-      idColor: basket?.color?.id,
+      color: basket?.color,
+      size: basket?.size,
     } : null;
 
-    navigate(`/product/${id}`, { state: data })
+    navigate(`/product/${id}`, { state: data });
   };
 
   return (

@@ -22,16 +22,21 @@ const ProductDetails = ({ product }) => {
 
   // обновляем текущий цвет
   useEffect(() => {
-    const colorQuery = searchParams.get('color') || '';
-
-    if (colorQuery) {
-      const findColor = product.colors.find(el => el.id === +colorQuery);
-
-      findColor ? setColor(findColor) : setColor(product.colors[0]);
+    // если мы пришли из корзины, то устанавливаем нужный цвет
+    if (location.state) {
+      setColor(location.state.color);
     } else {
-      setColor(product.colors[0]);
-    };
-  }, [product, searchParams])
+      const colorQuery = searchParams.get('color') || '';
+
+      if (colorQuery) {
+        const findColor = product.colors.find(el => el.id === +colorQuery);
+
+        findColor ? setColor(findColor) : setColor(product.colors[0]);
+      } else {
+        setColor(product.colors[0]);
+      };
+    }
+  }, [location.state, product, searchParams])
   // обновляем текущую картинку
   useEffect(() => setCurrentImage(color?.images[0]), [color?.images]);
 
@@ -75,41 +80,61 @@ const ProductDetails = ({ product }) => {
 
   return (
     <div className={s.container}>
-      {color &&
+      {
+        color &&
         <Slider
-          images={location.state ? location.state.images : color.images}
-          currentImage={location.state ? location.state.images[0] : currentImage}
+          images={color.images}
+          currentImage={currentImage}
           setCurrentImage={setCurrentImage}
           className={s.slider}
-        />}
+        />
+      }
 
       <div className={s.cardProductContent}>
-        {color && (
-          <div>
-            <Name name={`${product.name} ${color.name}`} />
-            <Description description={color.description} />
-            <Price price={color.price} />
-            <Sizes
-              productSize={color.sizes}
-              removeSearchParam={removeSearchParam}
-              addSearchParam={addSearchParam}
+        {
+          color && (
+            <div>
+              <Name name={`${product.name} ${color.name}`} />
+              <Description description={color.description} />
+              <Price price={color.price} />
+              {
+                !location.state ? (
+                  <Sizes
+                    productSize={color.sizes}
+                    removeSearchParam={removeSearchParam}
+                    addSearchParam={addSearchParam}
+                  />
+                ) : (
+                  <p>
+                    {`${location.state.size.number} (${location.state.size.label})`}
+                  </p>
+                )
+              }
+            </div>
+          )
+        }
+        {/* не показываем, если находимся в корзине */}
+        {
+          !location.state &&
+          <Colors
+            colors={product.colors}
+            changeColor={changeColor}
+            currentColor={color?.id}
+          />
+        }
+
+        {/* не показываем, если находимся в корзине */}
+        {
+          !location.state &&
+          <div className={s.basketBtn}>
+            <Button
+              onClick={addToBasket}
+              text={"В корзину"}
+              ariaLabel={"добавить в корзину"}
+              disabled={(!catalog.sizes.selecteSize || !color) ?? false}
             />
           </div>
-        )}
-        <Colors
-          colors={product.colors}
-          changeColor={changeColor}
-          currentColor={location.state ? location.state.idColor : color?.id}
-        />
-
-        <div className={s.basketBtn}>
-          <Button
-            onClick={addToBasket}
-            text={"В корзину"}
-            ariaLabel={"добавить в корзину"}
-            disabled={(!catalog.sizes.selecteSize || !color) ?? false}
-          />
-        </div>
+        }
       </div>
     </div>
   );
