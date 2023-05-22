@@ -22,7 +22,7 @@ function App() {
   return (
     <Provider store={store}>
       <AppBar />
-      
+
       <Container>
         <Suspense fallback={<Spinner />}>
           <Routes>

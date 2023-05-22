@@ -4,27 +4,53 @@ import {
   errorSetBasket,
 } from './basketSlice';
 
+const addLocalStorage = (array) => {
+  localStorage.setItem('basket', JSON.stringify(array));
+};
+const fetchLocalStorage = () => {
+  return JSON.parse(localStorage.getItem("basket"));
+};
+
 // получение всей корзины
-export const fetchBasket = () => async (dispatch, getState) => {
-  const { basket } = getState();
-
+export const fetchBasket = () => async (dispatch) => {
   try {
+    dispatch(loadingSetBasket(true));
+    const basketProducts = fetchLocalStorage();
 
+    if (!basketProducts) addLocalStorage([]);
+
+    dispatch(loadingSetBasket(false));
+    dispatch(errorSetBasket(''));
+    dispatch(setBasket(basketProducts));
   } catch (error) {
-
+    dispatch(loadingSetBasket(false));
+    dispatch(errorSetBasket(error.message));
     console.log(error.message);
   };
 };
 
 // добавление в корзину
 export const addProductBasket = (product) => async (dispatch, getState) => {
-  console.log("🚀 ~ addProductBasket ~ product:", product)
   const { basket } = getState();
+  let basketProducts = basket.items;
 
   try {
+    dispatch(loadingSetBasket(true));
+    const findProduct = basketProducts.find(el => el.idBasket === product.idBasket);
 
+    if (findProduct) {
+      throw new Error('Данный товар уже есть в корзине!');
+    } else {
+      basketProducts = [...basketProducts, product];
+      dispatch(loadingSetBasket(false));
+      dispatch(errorSetBasket(''));
+
+      addLocalStorage(basketProducts);
+      dispatch(setBasket(basketProducts));
+    };
   } catch (error) {
-
+    dispatch(loadingSetBasket(false));
+    dispatch(errorSetBasket(error.message));
     console.log(error.message);
   };
 };

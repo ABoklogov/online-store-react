@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ProductDetails.module.css';
 import PropTypes from 'prop-types';
@@ -14,6 +14,7 @@ import Button from 'components/Button';
 
 const ProductDetails = ({ product }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { catalog } = useSelector(state => state);
   const [searchParams, setSearchParams] = useSearchParams();
   const [color, setColor] = useState(null);
@@ -33,7 +34,7 @@ const ProductDetails = ({ product }) => {
   }, [product, searchParams])
   // обновляем текущую картинку
   useEffect(() => setCurrentImage(color?.images[0]), [color?.images]);
-  
+
   const changeColor = (color) => {
     setColor(color);
     setCurrentImage(color.images[0]);
@@ -53,18 +54,21 @@ const ProductDetails = ({ product }) => {
     for (let entry of searchParams.entries()) {
       search[entry[0]] = entry[1];
     };
-    setSearchParams({...search, [key]: value });
+    setSearchParams({ ...search, [key]: value });
   };
 
   const addToBasket = () => {
     const productTotal = {
-      id: `${product.id}${color.id}${catalog.sizes.selecteSize.id}`,
+      id: product.id,
+      idBasket: `${product.id}-${color.id}-${catalog.sizes.selecteSize.id}`,
       name: product.name,
-      description: color.description,
-      color: color.name,
+      colors: product.colors,
       image: color.images[0],
-      price: color.price,
-      size: catalog.sizes.selecteSize,
+      basket: {
+        description: color.description,
+        size: catalog.sizes.selecteSize,
+        color: color,
+      }
     };
     dispatch(addProductBasket(productTotal));
   };
@@ -73,8 +77,8 @@ const ProductDetails = ({ product }) => {
     <div className={s.container}>
       {color &&
         <Slider
-          images={color.images}
-          currentImage={currentImage}
+          images={location.state ? location.state.images : color.images}
+          currentImage={location.state ? location.state.images[0] : currentImage}
           setCurrentImage={setCurrentImage}
           className={s.slider}
         />}
@@ -95,7 +99,7 @@ const ProductDetails = ({ product }) => {
         <Colors
           colors={product.colors}
           changeColor={changeColor}
-          currentColor={color?.id}
+          currentColor={location.state ? location.state.idColor : color?.id}
         />
 
         <div className={s.basketBtn}>
@@ -103,7 +107,7 @@ const ProductDetails = ({ product }) => {
             onClick={addToBasket}
             text={"В корзину"}
             ariaLabel={"добавить в корзину"}
-            disabled={ (!catalog.sizes.selecteSize || !color) ?? false }
+            disabled={(!catalog.sizes.selecteSize || !color) ?? false}
           />
         </div>
       </div>
