@@ -6,7 +6,7 @@ function Slider({ images, currentImage, setCurrentImage }) {
   return (
     <div className={s.container}>
       <img
-        src={currentImage ? currentImage : noImage}
+        src={currentImage ? require(`../../img${currentImage}`) : noImage}
         alt="images-product"
         className={s.currentImage}
       />
@@ -19,7 +19,11 @@ function Slider({ images, currentImage, setCurrentImage }) {
               className={s.image}
               onClick={() => setCurrentImage(image)}
             >
-              <img src={image} alt="images-scroll" className={s.imgScroll} />
+              <img
+                src={require(`../../img${image}`)}
+                alt="images-scroll"
+                className={s.imgScroll}
+              />
             </li>
           ))
         }

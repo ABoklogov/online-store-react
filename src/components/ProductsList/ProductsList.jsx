@@ -30,7 +30,7 @@ function ProductsList({ products }) {
               onClick={() => goToProduct(id, basket)}
               className={s.descriptionBox}
             >
-              <img src={image} alt={name} className={s.img} />
+              <img src={require(`../../img${image}`)} alt={name} className={s.img} />
               <Name name={name} />
               {
                 /* если находимся на странице корзины */
