@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.3b0175bd.css",
-    "main.js": "/static/js/main.fe58ca64.js",
-    "static/css/617.5a95df7b.chunk.css": "/static/css/617.5a95df7b.chunk.css",
-    "static/js/617.560ca661.chunk.js": "/static/js/617.560ca661.chunk.js",
-    "static/css/951.30bbce5b.chunk.css": "/static/css/951.30bbce5b.chunk.css",
-    "static/js/951.d0073d67.chunk.js": "/static/js/951.d0073d67.chunk.js",
-    "static/css/791.ad351c4f.chunk.css": "/static/css/791.ad351c4f.chunk.css",
-    "static/js/791.3693d5a7.chunk.js": "/static/js/791.3693d5a7.chunk.js",
-    "static/js/286.a27e3aa6.chunk.js": "/static/js/286.a27e3aa6.chunk.js",
-    "static/media/noImage.jpeg": "/static/media/noImage.e9e6283e53375e78dd1b.jpeg",
-    "index.html": "/index.html",
-    "main.3b0175bd.css.map": "/static/css/main.3b0175bd.css.map",
-    "main.fe58ca64.js.map": "/static/js/main.fe58ca64.js.map",
-    "617.5a95df7b.chunk.css.map": "/static/css/617.5a95df7b.chunk.css.map",
-    "617.560ca661.chunk.js.map": "/static/js/617.560ca661.chunk.js.map",
-    "951.30bbce5b.chunk.css.map": "/static/css/951.30bbce5b.chunk.css.map",
-    "951.d0073d67.chunk.js.map": "/static/js/951.d0073d67.chunk.js.map",
-    "791.ad351c4f.chunk.css.map": "/static/css/791.ad351c4f.chunk.css.map",
-    "791.3693d5a7.chunk.js.map": "/static/js/791.3693d5a7.chunk.js.map",
-    "286.a27e3aa6.chunk.js.map": "/static/js/286.a27e3aa6.chunk.js.map"
+    "main.css": "/online-store-react/static/css/main.3b0175bd.css",
+    "main.js": "/online-store-react/static/js/main.a4fe31e8.js",
+    "static/css/617.5a95df7b.chunk.css": "/online-store-react/static/css/617.5a95df7b.chunk.css",
+    "static/js/617.560ca661.chunk.js": "/online-store-react/static/js/617.560ca661.chunk.js",
+    "static/css/951.30bbce5b.chunk.css": "/online-store-react/static/css/951.30bbce5b.chunk.css",
+    "static/js/951.d0073d67.chunk.js": "/online-store-react/static/js/951.d0073d67.chunk.js",
+    "static/css/791.ad351c4f.chunk.css": "/online-store-react/static/css/791.ad351c4f.chunk.css",
+    "static/js/791.3693d5a7.chunk.js": "/online-store-react/static/js/791.3693d5a7.chunk.js",
+    "static/js/286.a27e3aa6.chunk.js": "/online-store-react/static/js/286.a27e3aa6.chunk.js",
+    "static/media/noImage.jpeg": "/online-store-react/static/media/noImage.e9e6283e53375e78dd1b.jpeg",
+    "index.html": "/online-store-react/index.html",
+    "main.3b0175bd.css.map": "/online-store-react/static/css/main.3b0175bd.css.map",
+    "main.a4fe31e8.js.map": "/online-store-react/static/js/main.a4fe31e8.js.map",
+    "617.5a95df7b.chunk.css.map": "/online-store-react/static/css/617.5a95df7b.chunk.css.map",
+    "617.560ca661.chunk.js.map": "/online-store-react/static/js/617.560ca661.chunk.js.map",
+    "951.30bbce5b.chunk.css.map": "/online-store-react/static/css/951.30bbce5b.chunk.css.map",
+    "951.d0073d67.chunk.js.map": "/online-store-react/static/js/951.d0073d67.chunk.js.map",
+    "791.ad351c4f.chunk.css.map": "/online-store-react/static/css/791.ad351c4f.chunk.css.map",
+    "791.3693d5a7.chunk.js.map": "/online-store-react/static/js/791.3693d5a7.chunk.js.map",
+    "286.a27e3aa6.chunk.js.map": "/online-store-react/static/js/286.a27e3aa6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3b0175bd.css",
-    "static/js/main.fe58ca64.js"
+    "static/js/main.a4fe31e8.js"
   ]
 }
