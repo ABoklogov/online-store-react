@@ -10,9 +10,11 @@
   --greyLight: #e3e3e3;
   --darkGray: #5c5c5c;
   --blue: #0f7fcc;
-  --blueHover: #084f80;
+  --blueHover: #65b0e6;
   --blueLight: #b5d3e7;
   --green: #9cc330;
+  --red: #db7373;
+  --redHover: #e42a2a;
   /* radius */
   --radiusItem: 8px;
 }

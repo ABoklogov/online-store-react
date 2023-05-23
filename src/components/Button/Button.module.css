@@ -1,4 +1,4 @@
-.button {
+.btnBlue {
   background-color: var(--blueLight);
   border-radius: var(--radiusItem);
   border: none;
@@ -8,6 +8,20 @@
   text-transform: uppercase;
 }
 
-.button:hover {
+.btnBlue:hover {
   background-color: var(--blueHover);
+}
+
+.btnRed {
+  background-color: var(--red);
+  border-radius: var(--radiusItem);
+  border: none;
+  height: 30px;
+  padding: 2px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btnRed:hover {
+  background-color: var(--redHover);
 }

@@ -19,6 +19,6 @@ function ProductsView() {
       <ProductsList products={catalog.products.items} />
     </>
   );
-}
+};
 
 export default ProductsView;

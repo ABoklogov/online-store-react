@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import s from 'components/Sizes/Sizes.module.css';
 import PropTypes from 'prop-types';
-import {fetchSizes, chooseSize} from 'store/catalog/catalogOperations';
+import { fetchSizes, chooseSize } from 'store/catalog/catalogOperations';
 import { setSelectedSize } from 'store/catalog/catalogSlice';
 import Spinner from 'components/Spinner';
 
@@ -17,7 +17,7 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
     dispatch(fetchSizes());
     return () => removeSize();
   }, []);
-  
+
   // проверяем url строку
   useEffect(() => {
     const sizeQuery = searchParams.get('size') || '';
@@ -27,7 +27,7 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
       findSize ? addSize(findSize) : removeSize();
     };
   }, [productSize, searchParams]);
-  
+
   const sizeAvailability = (id) => {
     let style = null;
 
@@ -42,7 +42,7 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
     });
 
     if (id === activeSizeId) {
-      style = {...style, borderColor: "#084f80", backgroundColor: "#084f80"}
+      style = { ...style, borderColor: "#084f80", backgroundColor: "#084f80" }
     };
 
     return style;
@@ -51,14 +51,14 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
   const changeSize = (e, id) => {
     const findSize = productSize?.find(el => el === id);
     if (!findSize) {
-      return 
+      return
     } else {
       const event = e.currentTarget;
-    
+
       if (event.data_selected !== 'active') {
         event.style.backgroundColor = '#084f80';
         event.style.borderColor = '#084f80';
- 
+
         if (activeSizeId === id) {
           removeSize();
           removeSearchParam('size');
@@ -81,34 +81,34 @@ function Sizes({ productSize, removeSearchParam, addSearchParam }) {
     dispatch(chooseSize(id));
     setActiveSizeId(id);
   };
-  
+
   const removeSize = () => {
     dispatch(setSelectedSize(null));
     setActiveSizeId(null);
   };
 
   return (
-      <ul className={s.Sizes}>
-        {
+    <ul className={s.Sizes}>
+      {
         catalog.sizes?.items?.map(({ id, label, number }) => (
-            <li
-              key={id}
-              onClick={(e) => changeSize(e, id)}
-              style={sizeAvailability(id)}
-              className={s.sizeItem}
-              data_selected={activeSizeId === id ? 'active' : ''}
-            >
-              {
-                (catalog.sizes.isLoading && activeSizeId === id) ? (
-                  <Spinner margin={0} width={30} />
-                ) : (
-                  <span className={s.sizeText}>{ `${number} (${label})`}</span>
-                )
-              }
-            </li>
-          ))
-        }
-      </ul>
+          <li
+            key={id}
+            onClick={(e) => changeSize(e, id)}
+            style={sizeAvailability(id)}
+            className={s.sizeItem}
+            data_selected={activeSizeId === id ? 'active' : ''}
+          >
+            {
+              (catalog.sizes.isLoading && activeSizeId === id) ? (
+                <Spinner margin={0} width={30} />
+              ) : (
+                <span className={s.sizeText}>{`${number} (${label})`}</span>
+              )
+            }
+          </li>
+        ))
+      }
+    </ul>
   );
 };
 

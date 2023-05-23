@@ -60,21 +60,22 @@ export const removeProductBasket = (id) => async (dispatch, getState) => {
   const { basket } = getState();
 
   try {
-
+    const totalProducts = basket.items.filter(el => el.idBasket !== id);
+    dispatch(setBasket(totalProducts));
+    addLocalStorage(totalProducts);
   } catch (error) {
-
+    dispatch(errorSetBasket(error.message));
     console.log(error.message);
   };
 };
 
 // очистка корзины
-export const removeBasket = () => async (dispatch, getState) => {
-  const { basket } = getState();
-
+export const removeBasket = () => async (dispatch) => {
   try {
-
+    dispatch(setBasket([]));
+    addLocalStorage([]);
   } catch (error) {
-
+    dispatch(errorSetBasket(error.message));
     console.log(error.message);
   };
 };

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBasket } from 'store/basket/basketOperations';
+import { fetchBasket, removeBasket } from 'store/basket/basketOperations';
 import s from './BasketView.module.css';
 import ProductsList from 'components/ProductsList'
 import Button from 'components/Button';
@@ -31,6 +31,13 @@ function BasketView() {
             onClick={() => navigate(-1)}
             text={"Назад"}
             ariaLabel={"Вернуться назад"}
+          />
+
+          <Button
+            text={"Очистить корзину"}
+            ariaLabel={"Очистить корзину"}
+            color={'red'}
+            onClick={() => dispatch(removeBasket())}
           />
         </div>
 

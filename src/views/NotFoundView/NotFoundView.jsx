@@ -1,5 +1,7 @@
+import ErrorMessage from 'components/ErrorMessage';
+
 function NotFoundView() {
-  return ( <div>Страница не найдена</div> );
-}
+  return (<ErrorMessage error={'Страница не найдена'} />);
+};
 
 export default NotFoundView;

@@ -22,7 +22,6 @@ function App() {
   return (
     <Provider store={store}>
       <AppBar />
-
       <Container>
         <Suspense fallback={<Spinner />}>
           <Routes>
@@ -35,6 +34,6 @@ function App() {
       </Container>
     </Provider>
   );
-}
+};
 
 export default App;

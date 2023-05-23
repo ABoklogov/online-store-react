@@ -1,4 +1,4 @@
-import s from 'components/Price/Price.module.css';
+// import s from 'components/Price/Price.module.css';
 import PropTypes from 'prop-types';
 
 function Price({ price }) {

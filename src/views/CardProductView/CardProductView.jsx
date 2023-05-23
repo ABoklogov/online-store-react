@@ -7,13 +7,12 @@ import { fetchBasket } from 'store/basket/basketOperations';
 import ProductDetails from 'components/ProductDetails';
 import ErrorMessage from 'components/ErrorMessage';
 import Button from 'components/Button';
-// import Spinner from 'components/Spinner';
 
 function CardProductView() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { catalog, basket } = useSelector(state => state);
+  const { catalog } = useSelector(state => state);
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ function CardProductView() {
       const product = await dispatch(fetchCardProduct(productId));
       setProduct(product);
     })();
-  }, [productId])
+  }, [productId]);
 
   return (
     <>

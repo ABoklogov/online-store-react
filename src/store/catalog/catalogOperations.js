@@ -52,7 +52,6 @@ export const fetchProducts = () => async (dispatch, getState) => {
 
 // карточка товара
 export const fetchCardProduct = (id) => async (dispatch) => {
-
   try {
     dispatch(loadingSetProduct(true));
     const data = await getProduct(id);
